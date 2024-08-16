@@ -3175,10 +3175,6 @@
   "None": "Hide all",
   "Player": "Show only from other players"
 },
-"SETTINGS.5eAllowPlayerDamageApplication": {
-  "Name": "Player Damage Application",
-  "Hint": "Allow players to use the damage application method in damage rolls."
-},
 "SETTINGS.5eCriticalMaxDiceN": "Critical Damage Maximize Dice",
 "SETTINGS.5eCriticalMaxDiceL": "Make critical hits more deadly by maximizing the values of base damage dice.",
 "SETTINGS.5eCriticalModifiersN": "Critical Damage Multiply Modifiers",
@@ -3229,6 +3225,10 @@
   "Hint": "Disabling the token ring animations can improve performance."
 },
 "SETTINGS.DND5E": {
+  "ALLOWDAMAGETRAY": {
+    "Name": "Player Damage Application",
+    "Hint": "Allow players to use the damage application method in damage rolls."
+  },
   "ALLOWSUMMONING": {
     "Name": "Allow Summoning",
     "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
