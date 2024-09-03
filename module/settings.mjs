@@ -56,9 +56,9 @@ export function registerSystemSettings() {
     }
   });
 
-  game.settings.register("dnd5e", "allowPlayerDamageApplication", {
-    name: "SETTINGS.5eAllowPlayerDamageApplication.Name",
-    hint: "SETTINGS.5eAllowPlayerDamageApplication.Hint",
+  game.settings.register("dnd5e", "allowPlayerDamageTray", {
+    name: "SETTINGS.DND5E.ALLOWDAMAGETRAY.Name",
+    hint: "SETTINGS.DND5E.ALLOWDAMAGETRAY.Hint",
     scope: "world",
     config: true,
     default: true,
