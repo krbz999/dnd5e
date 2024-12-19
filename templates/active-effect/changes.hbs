@@ -1,0 +1,27 @@
+<section class="tab {{#if tabs.changes.active}}active{{/if}}" data-group="main" data-tab="changes">
+  <header>
+    <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
+    <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
+    <div class="value">{{localize "EFFECT.ChangeValue"}}</div>
+    <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
+    <div class="controls">
+      <a data-action="addChange">
+        <i class="fa-regular fa-plus-square"></i>
+      </a>
+    </div>
+  </header>
+  <ol class="scrollable">
+    {{#each changes}}
+    <li class="change">
+      {{#each fields}}
+      {{formInput field value=value name=name choices=choices placeholder=placeholder}}
+      {{/each}}
+      <div class="controls">
+        <a data-action="deleteChange" data-idx="{{idx}}">
+          <i class="fas fa-trash"></i>
+        </a>
+      </div>
+    </li>
+    {{/each}}
+  </ol>
+</section>

@@ -1,0 +1,10 @@
+<section class="tab {{#if tabs.application.active}}active{{/if}}" data-group="main" data-tab="application">
+  {{#each application}}
+  <fieldset class="card">
+    <legend>{{localize label}}</legend>
+    {{#each fields}}
+    {{formGroup field value=value enriched=enriched disabled=disabled height=height options=choices}}
+    {{/each}}
+  </fieldset>
+  {{/each}}
+</section>

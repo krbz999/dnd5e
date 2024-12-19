@@ -181,6 +181,14 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClassContainer"
   });
 
+  if ( game.release.generation > 12 ) {
+    DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", foundry.applications.sheets.ActiveEffectConfig);
+    DocumentSheetConfig.registerSheet(ActiveEffect, "dnd5e", applications.effect.ActiveEffectSheet5e, {
+      makeDefault: true,
+      label: "DND5E.SheetClassActiveEffect"
+    });
+  }
+
   DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassJournalEntry"
