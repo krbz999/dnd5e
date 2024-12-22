@@ -1,7 +1,8 @@
-import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import FormulaField from "../fields/formula-field.mjs";
-import DamageField from "../shared/damage-field.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 import BaseActivityData from "./base-activity.mjs";
+import DamageField from "../shared/damage-field.mjs";
+import FormulaField from "../fields/formula-field.mjs";
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -419,9 +420,10 @@ export default class AttackActivityData extends BaseActivityData {
       }
     }
 
-    const criticalBonusDice = this.actor?.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
-    if ( (this.actionType === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
-      foundry.utils.setProperty(roll, "options.critical.bonusDice", criticalBonusDice);
+    if ( this.actionType === "mwak" ) {
+      const property = this.actor?.getFlag("dnd5e", "meleeCriticalDamageDice");
+      const bonus = Math.max(0, simplifyBonus(property, rollData));
+      if ( bonus ) foundry.utils.setProperty(roll, "options.critical.bonusDice", bonus);
     }
 
     return roll;

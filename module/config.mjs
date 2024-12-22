@@ -4008,22 +4008,22 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsWeaponCritThreshold",
     hint: "DND5E.FlagsWeaponCritThresholdHint",
     section: "DND5E.Feats",
-    type: Number,
-    placeholder: 20
+    type: String,
+    placeholder: "20"
   },
   spellCriticalThreshold: {
     name: "DND5E.FlagsSpellCritThreshold",
     hint: "DND5E.FlagsSpellCritThresholdHint",
     section: "DND5E.Feats",
-    type: Number,
-    placeholder: 20
+    type: String,
+    placeholder: "20"
   },
   meleeCriticalDamageDice: {
     name: "DND5E.FlagsMeleeCriticalDice",
     hint: "DND5E.FlagsMeleeCriticalDiceHint",
     section: "DND5E.Feats",
-    type: Number,
-    placeholder: 0
+    type: String,
+    placeholder: "0"
   }
 };
 preLocalize("characterFlags", { keys: ["name", "hint", "section"] });

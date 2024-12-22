@@ -1,4 +1,4 @@
-import { filteredKeys, formatDistance } from "../../utils.mjs";
+import { filteredKeys, formatDistance, simplifyBonus } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -417,7 +417,9 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @override */
   get criticalThreshold() {
-    return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
+    const property = this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold;
+    if ( !property ) return Infinity;
+    return simplifyBonus(property, this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */

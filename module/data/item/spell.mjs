@@ -1,4 +1,4 @@
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, simplifyBonus } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
@@ -344,7 +344,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @override */
   get criticalThreshold() {
-    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+    const property = this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold;
+    if ( !property ) return Infinity;
+    return simplifyBonus(property, this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */

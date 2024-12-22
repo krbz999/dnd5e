@@ -25,6 +25,9 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {Set<string>}
    */
   static FORMULA_FIELDS = new Set([
+    "flags.dnd5e.meleeCriticalDamageDice",
+    "flags.dnd5e.spellCriticalThreshold",
+    "flags.dnd5e.weaponCriticalThreshold",
     "system.attributes.ac.bonus",
     "system.attributes.ac.min",
     "system.attributes.encumbrance.bonuses.encumbered",
