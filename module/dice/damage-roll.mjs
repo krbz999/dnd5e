@@ -92,6 +92,28 @@ export default class DamageRoll extends BasicRoll {
     return super.build(config, dialog, message);
   }
 
+  /* -------------------------------------------------- */
+
+  /** @inheritDoc */
+  static _applyAugmentations(config={}, dialog={}, message={}) {
+    const actor = config.subject?.item?.actor ?? config.subject;
+    const augmentations = actor?.system?.augmentations?.getByType("damage") ?? [];
+    for (const aug of augmentations) {
+      if ( aug.ignored ) continue;
+      const types = aug.damage.types.size ? Array.from(aug.damage.types) : config.rolls[0].options.types;
+      config.rolls.push({
+        parts: [aug.augments.formula],
+        data: config.subject.getRollData(),
+        options: {
+          properties: [],
+          type: types[0],
+          types: types,
+          augmentation: aug.uuid
+        }
+      });
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @override */

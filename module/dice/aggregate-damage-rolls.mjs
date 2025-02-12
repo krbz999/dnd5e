@@ -8,6 +8,7 @@ const { OperatorTerm, RollTerm } = foundry.dice.terms;
  * @returns {DamageRoll[]}
  */
 export default function aggregateDamageRolls(rolls, { respectProperties }={}) {
+  return rolls; // Temporarily disabled.
   const makeHash = (type, properties=[]) => [type, ...(respectProperties ? Array.from(properties).sort() : [])].join();
 
   // Split rolls into new sets of terms based on damage type & properties

@@ -1,10 +1,12 @@
 import { simplifyBonus } from "../../../utils.mjs";
+import AugmentationData from "../../augments/augmentation.mjs";
+import AugmentationField from "../../augments/augmentation-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import CommonTemplate from "./common.mjs";
 
-const { NumberField, SchemaField } = foundry.data.fields;
+const { EmbeddedDataField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * A template for all actors that are creatures
@@ -27,6 +29,9 @@ const { NumberField, SchemaField } = foundry.data.fields;
 export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      augmentations: game.release.generation >= 13
+        ? new AugmentationField(new EmbeddedDataField(AugmentationData))
+        : undefined,
       bonuses: new SchemaField({
         mwak: makeAttackBonuses(),
         rwak: makeAttackBonuses(),

@@ -124,6 +124,17 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * Apply augmentations from the actor performing the roll.
+   * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
+   * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
+   * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
+   * @abstract
+   */
+  static _applyAugmentations(config={}, dialog={}, message={}) {}
+
+  /* -------------------------------------------- */
+
+  /**
    * Stage one of the standard rolling workflow, configuring the roll.
    * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
    * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
@@ -148,6 +159,7 @@ export default class BasicRoll extends Roll {
       if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, config, dialog, message) === false ) return [];
     }
 
+    this._applyAugmentations(config, dialog, message);
     this.applyKeybindings(config, dialog, message);
 
     let rolls;

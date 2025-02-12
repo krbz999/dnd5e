@@ -277,6 +277,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  getEmbeddedDocument(embeddedName, id, options) {
+    let doc;
+    switch ( embeddedName ) {
+      case "Augmentation": doc = this.system.augmentations?.get(id); break;
+      default: return super.getEmbeddedDocument(embeddedName, id, options);
+    }
+    if ( options?.strict ) {
+      throw new Error(`The key ${id} does not exist in the ${embeddedName} Collection`);
+    }
+    return doc;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Return the amount of experience required to gain a certain character level.
    * @param {number} level  The desired level.
@@ -792,6 +807,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      */
     if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
+
+    damages = damages.filter(dmg => {
+      if ( !dmg.augmentation ) return true;
+      return fromUuidSync(dmg.augmentation)?.evaluate({ target: this });
+    });
 
     const multiplier = options.multiplier ?? 1;
 
