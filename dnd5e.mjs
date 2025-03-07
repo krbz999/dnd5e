@@ -106,6 +106,9 @@ Hooks.once("init", function() {
   // Set up status effects
   _configureStatusEffects();
 
+  // Register queries.
+  documents.Actor5e.registerActorQueries();
+
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;

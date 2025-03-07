@@ -2649,6 +2649,32 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Register actor-related queries.
+   */
+  static registerActorQueries() {
+    if ( game.release.generation < 13 ) return;
+    Object.assign(CONFIG.queries, {
+      rest: async ({ type, config }) => {
+        if ( !game.user.character ) return null;
+        let result;
+        switch (type) {
+          case "short":
+            result = await game.user.character.shortRest(config);
+            break;
+          case "long":
+            result = await game.user.character.longRest(config);
+            break;
+        }
+        if ( !result ) return null;
+        const { type: _type, deltas, newDay, updateData, updateItems } = result;
+        return { type: _type, deltas, newDay, updateData, updateItems };
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Property Attribution                        */
   /* -------------------------------------------- */
 
