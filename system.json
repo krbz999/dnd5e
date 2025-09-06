@@ -125,7 +125,8 @@
           "activities.*.img": ["IMAGE"]
         },
         "htmlFields": ["description.value", "description.chat"]
-      }
+      },
+      "progress": {}
     },
     "JournalEntryPage": {
       "class": {

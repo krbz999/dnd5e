@@ -1,0 +1,16 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ItemProgressDetails" }}</legend>
+
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true }}
+
+    <div class="form-group split-group">
+      <label>Progress</label>
+      <div class="form-fields">
+        {{ formField fields.progression.fields.value value=source.progression.value classes="label-top" }}
+        {{ formField fields.progression.fields.max value=source.progression.max classes="label-top" placeholder="∞" }}
+      </div>
+    </div>
+
+</fieldset>
